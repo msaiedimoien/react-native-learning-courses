@@ -32,10 +32,10 @@ const App = () => {
     };
 
     return(
-        <NavigationContainer screenOptions={{
-            headerShown: false,
-        }}>
-            <Stack.Navigator>
+        <NavigationContainer>
+            <Stack.Navigator screenOptions={{
+                headerShown: false,
+            }}>
                 <Stack.Screen name='Welcome' component={WelcomeScreen} />
             </Stack.Navigator>
         </NavigationContainer>
