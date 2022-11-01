@@ -1,20 +1,45 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import React, { useEffect } from "react";
+import { NavigationContainer } from "@react-navigation/native";
+import { createStackNavigator } from "@react-navigation/stack";
+import { I18nManager } from "react-native";
+import { useFonts } from 'expo-font';
+import * as SplashScreen from 'expo-splash-screen';
+import WelcomeScreen from "./app/screens/WelcomeScreen";
 
-export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
-}
+I18nManager.allowRTL(true);
+I18nManager.forceRTL(true);
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+SplashScreen.preventAutoHideAsync();
+const Stack = createStackNavigator();
+
+const App = () => {
+    const [fontsLoaded] = useFonts({
+        'byekan': require('./app/assets/fonts/byekan.ttf'),
+        'ih': require('./app/assets/fonts/ih.ttf'),
+    });
+
+    useEffect(() => {
+        const loadFarsiFonts = async () => {
+            if (fontsLoaded) {
+                await SplashScreen.hideAsync();
+            }
+        }
+        loadFarsiFonts();
+    }, [fontsLoaded]);
+
+    if (!fontsLoaded) {
+        return null;
+    };
+
+    return(
+        <NavigationContainer screenOptions={{
+            headerShown: false,
+        }}>
+            <Stack.Navigator>
+                <Stack.Screen name='Welcome' component={WelcomeScreen} />
+            </Stack.Navigator>
+        </NavigationContainer>
+    )
+};
+
+export default App;
