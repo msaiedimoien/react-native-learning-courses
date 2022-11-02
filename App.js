@@ -5,6 +5,7 @@ import { I18nManager } from "react-native";
 import { useFonts } from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
 import WelcomeScreen from "./app/screens/WelcomeScreen";
+import LoginScreen from "./app/screens/LoginScreen";
 
 I18nManager.allowRTL(true);
 I18nManager.forceRTL(true);
@@ -37,6 +38,7 @@ const App = () => {
                 headerShown: false,
             }}>
                 <Stack.Screen name='Welcome' component={WelcomeScreen} />
+                <Stack.Screen name='Login' component={LoginScreen} />
             </Stack.Navigator>
         </NavigationContainer>
     )
