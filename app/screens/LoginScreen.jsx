@@ -1,9 +1,16 @@
 import React from 'react';
 import { StyleSheet, View, Image, TextInput } from 'react-native';
 import { Formik } from 'formik';
+import * as Yup from 'yup';
 import Constants from "expo-constants";
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import {CustomButton} from "../components/CustomButton";
+import ErrorMessage from "../components/ErrorMessage";
+
+const validationSchema = Yup.object().shape({
+    email: Yup.string().required('این فیلد ضروری می باشد').email('ایمیل وارد شده معتبر نمی باشد'),
+    password: Yup.string().required('این فیلد ضروری می باشد').min(6, 'پسورد نباید کمتر از 6 کاراکتر باشد'),
+});
 
 const LoginScreen = () => {
   return (
@@ -11,9 +18,10 @@ const LoginScreen = () => {
       <Image style={styles.logo} source={require('../assets/logo.png')} />
         <Formik
             initialValues={{ email: "", password: "" }}
+            validationSchema={validationSchema}
             onSubmit={values => console.log(values)}
         >
-            {({ handleChange, handleSubmit }) => (
+            {({ handleChange, handleSubmit, errors, setFieldTouched, touched }) => (
                 <>
                     <View style={{flexDirection: 'row', alignItems: 'center'}}>
                         <TextInput
@@ -25,9 +33,11 @@ const LoginScreen = () => {
                             placeholderTextColor='gray'
                             autoCapitalize='none'
                             onChangeText={handleChange("email")}
+                            onBlur={() => setFieldTouched('email')}
                         />
                         <MaterialCommunityIcons name="email" size={24} color="orangered" />
                     </View>
+                    <ErrorMessage error={errors.email} visible={touched.email} />
                     <View style={{flexDirection: 'row', alignItems: 'center'}}>
                         <TextInput
                             style={styles.textInput}
@@ -38,9 +48,11 @@ const LoginScreen = () => {
                             autoCapitalize='none'
                             secureTextEntry
                             onChangeText={handleChange('password')}
+                            onBlur={() => setFieldTouched('password')}
                         />
                         <MaterialCommunityIcons name="lock" size={24} color="orangered" />
                     </View>
+                    <ErrorMessage error={errors.password} visible={touched.password} />
                     <View style={{marginBottom: 10}}/>
                     <View style={{width: '88%', marginRight: 35}}>
                         <CustomButton title='ورود' onPress={handleSubmit} color='tomato' />
