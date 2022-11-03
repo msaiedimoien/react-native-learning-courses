@@ -14,9 +14,9 @@ const styles = StyleSheet.create({
         width: '100%',
         justifyContent: "center",
         alignItems: "center",
-        padding: 15,
+        padding: 10,
         margin: 5,
-        borderRadius: 10,
+        borderRadius: 15,
     },
     text: {
         fontFamily: 'byekan',

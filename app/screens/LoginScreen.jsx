@@ -6,6 +6,7 @@ import Constants from "expo-constants";
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import {CustomButton} from "../components/CustomButton";
 import ErrorMessage from "../components/ErrorMessage";
+import NSDTextInput from "../components/NSDTextInput";
 
 const validationSchema = Yup.object().shape({
     email: Yup.string().required('این فیلد ضروری می باشد').email('ایمیل وارد شده معتبر نمی باشد'),
@@ -23,9 +24,9 @@ const LoginScreen = () => {
         >
             {({ handleChange, handleSubmit, errors, setFieldTouched, touched }) => (
                 <>
-                    <View style={{flexDirection: 'row', alignItems: 'center'}}>
-                        <TextInput
-                            style={styles.textInput}
+                        <NSDTextInput
+                            iconName='email'
+                            iconColor='orangered'
                             autoCorrect={false}
                             autoComplete='email'
                             keyboardType='email-address'
@@ -35,12 +36,10 @@ const LoginScreen = () => {
                             onChangeText={handleChange("email")}
                             onBlur={() => setFieldTouched('email')}
                         />
-                        <MaterialCommunityIcons name="email" size={24} color="orangered" />
-                    </View>
                     <ErrorMessage error={errors.email} visible={touched.email} />
-                    <View style={{flexDirection: 'row', alignItems: 'center'}}>
-                        <TextInput
-                            style={styles.textInput}
+                        <NSDTextInput
+                            iconName='lock'
+                            iconColor='orangered'
                             autoCorrect={false}
                             autoComplete='password'
                             placeholder='کلمه عبور'
@@ -50,11 +49,9 @@ const LoginScreen = () => {
                             onChangeText={handleChange('password')}
                             onBlur={() => setFieldTouched('password')}
                         />
-                        <MaterialCommunityIcons name="lock" size={24} color="orangered" />
-                    </View>
                     <ErrorMessage error={errors.password} visible={touched.password} />
                     <View style={{marginBottom: 10}}/>
-                    <View style={{width: '88%', marginRight: 35}}>
+                    <View style={{width: '90%'}}>
                         <CustomButton title='ورود' onPress={handleSubmit} color='tomato' />
                     </View>
                 </>
