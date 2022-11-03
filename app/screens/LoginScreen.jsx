@@ -1,9 +1,8 @@
 import React from 'react';
-import { StyleSheet, View, Image, TextInput } from 'react-native';
+import { StyleSheet, View, Image } from 'react-native';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 import Constants from "expo-constants";
-import { MaterialCommunityIcons } from '@expo/vector-icons';
 import {CustomButton} from "../components/CustomButton";
 import ErrorMessage from "../components/ErrorMessage";
 import NSDTextInput from "../components/NSDTextInput";
@@ -72,15 +71,6 @@ const styles = StyleSheet.create({
         width: 150,
         height: 190,
         marginVertical: 30
-    },
-    textInput: {
-        flex: 1,
-        padding: 10,
-        margin: 10,
-        borderWidth: 1,
-        borderColor: 'orange',
-        borderRadius: 10,
-        textAlign: "center"
     },
     button: {
         marginTop: 20

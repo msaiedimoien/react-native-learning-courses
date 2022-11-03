@@ -28,7 +28,6 @@ const styles = StyleSheet.create({
     textInput: {
         flex: 1,
         textAlign: "center",
-        // marginHorizontal: 10,
     },
 });
 

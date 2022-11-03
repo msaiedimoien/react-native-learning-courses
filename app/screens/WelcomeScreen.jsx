@@ -10,8 +10,7 @@ const WelcomeScreen = ({ navigation }) => {
                 <Text style={styles.firstText}>مهارت آموزی آنلاین را با ما تجربه کنید❤</Text>
             </View>
             <CustomButton title="ورود" onPress={() => navigation.navigate('Login')} color='royalblue'/>
-            <CustomButton title="ثبت نام" onPress={() => {
-            }} color='orangered'/>
+            <CustomButton title="ثبت نام" onPress={() => navigation.navigate('Register')} color='orangered'/>
         </ImageBackground>
     );
 };
