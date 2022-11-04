@@ -2,7 +2,7 @@ import React from 'react';
 import {StyleSheet, TextInput, View} from 'react-native';
 import {MaterialCommunityIcons} from "@expo/vector-icons";
 
-const NSDTextInput = ({ iconName, iconColor, ...otherProps }) => {
+const CustomTextInput = ({ iconName, iconColor, ...otherProps }) => {
   return (
     <View style={styles.container}>
       <TextInput style={styles.textInput} {...otherProps} />
@@ -31,4 +31,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default NSDTextInput;
+export default CustomTextInput;

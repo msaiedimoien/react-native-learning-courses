@@ -3,40 +3,38 @@ import { StyleSheet, View, Image } from 'react-native';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 import Constants from "expo-constants";
-import {CustomButton} from "../components/CustomButton";
-import ErrorMessage from "../components/ErrorMessage";
-import NSDTextInput from "../components/NSDTextInput";
+import CustomFormField from "../components/forms/CustomFormField";
+import SubmitButton from "../components/forms/SubmitButton";
 
 const validationSchema = Yup.object().shape({
-    fullName: Yup.string().required('این فیلد ضروری می باشد'),
-    email: Yup.string().required('این فیلد ضروری می باشد').email('ایمیل وارد شده معتبر نمی باشد'),
-    password: Yup.string().required('این فیلد ضروری می باشد').min(6, 'پسورد نباید کمتر از 6 کاراکتر باشد'),
-    repeatPassword: Yup.string().required('این فیلد ضروری می باشد').min(6, 'پسورد نباید کمتر از 6 کاراکتر باشد'),
+    fullName: Yup.string().required('نام و نام خانوادگی ضروری می باشد'),
+    email: Yup.string().required('ایمیل کاربری ضروری می باشد').email('ایمیل وارد شده معتبر نمی باشد'),
+    password: Yup.string().required('کلمه عبور ضروری می باشد').min(6, 'پسورد نباید کمتر از 6 کاراکتر باشد'),
+    passwordConfirm: Yup.string().required('تکرار کلمه عبور ضروری می باشد').oneOf([Yup.ref('password'), null], 'کلمه های عبور باید یکسان باشند'),
 });
 
 const RegisterScreen = () => {
     return (
         <View style={styles.container}>
-            <Image style={styles.logo} source={require('../assets/logo.png')} />
+            <Image style={styles.logo} source={require('../assets/logo.png')}/>
             <Formik
-                initialValues={{ fullName: "", email: "", password: "", repeatPassword: "" }}
+                initialValues={{fullName: "", email: "", password: "", passwordConfirm: ""}}
                 validationSchema={validationSchema}
                 onSubmit={values => console.log(values)}
             >
-                {({ handleChange, handleSubmit, errors, setFieldTouched, touched }) => (
+                {() => (
                     <>
-                        <NSDTextInput
+                        <CustomFormField
+                            name='fullName'
                             iconName='account'
                             iconColor='orangered'
                             autoCorrect={false}
                             placeholder='نام و نام خانوادگی'
                             placeholderTextColor='gray'
                             autoCapitalize='none'
-                            onChangeText={handleChange("fullName")}
-                            onBlur={() => setFieldTouched('fullName')}
                         />
-                        <ErrorMessage error={errors.fullName} visible={touched.fullName} />
-                        <NSDTextInput
+                        <CustomFormField
+                            name='email'
                             iconName='email'
                             iconColor='orangered'
                             autoCorrect={false}
@@ -45,39 +43,30 @@ const RegisterScreen = () => {
                             placeholder='ایمیل کاربری'
                             placeholderTextColor='gray'
                             autoCapitalize='none'
-                            onChangeText={handleChange("email")}
-                            onBlur={() => setFieldTouched('email')}
                         />
-                        <ErrorMessage error={errors.email} visible={touched.email} />
-                        <NSDTextInput
+                        <CustomFormField
+                            name='password'
                             iconName='lock'
                             iconColor='orangered'
                             autoCorrect={false}
-                            autoComplete='password'
                             placeholder='کلمه عبور'
                             placeholderTextColor='gray'
                             autoCapitalize='none'
                             secureTextEntry
-                            onChangeText={handleChange('password')}
-                            onBlur={() => setFieldTouched('password')}
                         />
-                        <ErrorMessage error={errors.password} visible={touched.password} />
-                        <NSDTextInput
+                        <CustomFormField
+                            name='passwordConfirm'
                             iconName='lock'
                             iconColor='orangered'
                             autoCorrect={false}
-                            autoComplete='password'
                             placeholder='تکرار کلمه عبور'
                             placeholderTextColor='gray'
                             autoCapitalize='none'
                             secureTextEntry
-                            onChangeText={handleChange('repeatPassword')}
-                            onBlur={() => setFieldTouched('repeatPassword')}
                         />
-                        <ErrorMessage error={errors.repeatPassword} visible={touched.repeatPassword} />
                         <View style={{marginBottom: 10}}/>
                         <View style={{width: '90%'}}>
-                            <CustomButton title='ثبت' onPress={handleSubmit} color='tomato' />
+                            <SubmitButton title='ثبت' color='tomato'/>
                         </View>
                     </>
                 )}

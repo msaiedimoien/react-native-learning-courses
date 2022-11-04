@@ -10,7 +10,8 @@ const styles = StyleSheet.create({
     error: {
         color: 'red',
         fontSize: 16,
-        fontFamily: 'ih'
+        fontFamily: 'ih',
+        textAlign: "center"
     }
 });
 

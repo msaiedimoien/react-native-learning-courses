@@ -3,9 +3,8 @@ import { StyleSheet, View, Image } from 'react-native';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 import Constants from "expo-constants";
-import {CustomButton} from "../components/CustomButton";
-import ErrorMessage from "../components/ErrorMessage";
-import NSDTextInput from "../components/NSDTextInput";
+import CustomFormField from "../components/forms/CustomFormField";
+import SubmitButton from "../components/forms/SubmitButton";
 
 const validationSchema = Yup.object().shape({
     email: Yup.string().required('این فیلد ضروری می باشد').email('ایمیل وارد شده معتبر نمی باشد'),
@@ -13,17 +12,18 @@ const validationSchema = Yup.object().shape({
 });
 
 const LoginScreen = () => {
-  return (
-    <View style={styles.container}>
-      <Image style={styles.logo} source={require('../assets/logo.png')} />
-        <Formik
-            initialValues={{ email: "", password: "" }}
-            validationSchema={validationSchema}
-            onSubmit={values => console.log(values)}
-        >
-            {({ handleChange, handleSubmit, errors, setFieldTouched, touched }) => (
-                <>
-                        <NSDTextInput
+    return (
+        <View style={styles.container}>
+            <Image style={styles.logo} source={require('../assets/logo.png')}/>
+            <Formik
+                initialValues={{email: "", password: ""}}
+                validationSchema={validationSchema}
+                onSubmit={values => console.log(values)}
+            >
+                {() => (
+                    <>
+                        <CustomFormField
+                            name='email'
                             iconName='email'
                             iconColor='orangered'
                             autoCorrect={false}
@@ -32,11 +32,9 @@ const LoginScreen = () => {
                             placeholder='ایمیل کاربری'
                             placeholderTextColor='gray'
                             autoCapitalize='none'
-                            onChangeText={handleChange("email")}
-                            onBlur={() => setFieldTouched('email')}
                         />
-                    <ErrorMessage error={errors.email} visible={touched.email} />
-                        <NSDTextInput
+                        <CustomFormField
+                            name='password'
                             iconName='lock'
                             iconColor='orangered'
                             autoCorrect={false}
@@ -45,19 +43,16 @@ const LoginScreen = () => {
                             placeholderTextColor='gray'
                             autoCapitalize='none'
                             secureTextEntry
-                            onChangeText={handleChange('password')}
-                            onBlur={() => setFieldTouched('password')}
                         />
-                    <ErrorMessage error={errors.password} visible={touched.password} />
-                    <View style={{marginBottom: 10}}/>
-                    <View style={{width: '90%'}}>
-                        <CustomButton title='ورود' onPress={handleSubmit} color='tomato' />
-                    </View>
-                </>
-            )}
-        </Formik>
-    </View>
-  );
+                        <View style={{marginBottom: 10}}/>
+                        <View style={{width: '90%'}}>
+                            <SubmitButton title='ورود' color='tomato'/>
+                        </View>
+                    </>
+                )}
+            </Formik>
+        </View>
+    );
 };
 
 const styles = StyleSheet.create({
