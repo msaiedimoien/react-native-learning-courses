@@ -7,6 +7,7 @@ import * as SplashScreen from 'expo-splash-screen';
 import WelcomeScreen from "./app/screens/WelcomeScreen";
 import LoginScreen from "./app/screens/LoginScreen";
 import RegisterScreen from "./app/screens/RegisterScreen";
+import TabsNavigator from "./app/containers/TabsNavigator";
 
 I18nManager.allowRTL(true);
 I18nManager.forceRTL(true);
@@ -41,6 +42,7 @@ const App = () => {
                 <Stack.Screen name='Welcome' component={WelcomeScreen} />
                 <Stack.Screen name='Login' component={LoginScreen} />
                 <Stack.Screen name='Register' component={RegisterScreen} />
+                <Stack.Screen name='Home' component={TabsNavigator} />
             </Stack.Navigator>
         </NavigationContainer>
     )

@@ -2,23 +2,22 @@ import React from 'react';
 import { StyleSheet, View, Image } from 'react-native';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
-import Constants from "expo-constants";
-import CustomFormField from "../components/forms/CustomFormField";
-import SubmitButton from "../components/forms/SubmitButton";
+import { CustomFormField, SubmitButton } from '../components/forms';
+import FlexScreen from "../components/shared/FlexScreen";
 
 const validationSchema = Yup.object().shape({
     email: Yup.string().required('این فیلد ضروری می باشد').email('ایمیل وارد شده معتبر نمی باشد'),
     password: Yup.string().required('این فیلد ضروری می باشد').min(6, 'پسورد نباید کمتر از 6 کاراکتر باشد'),
 });
 
-const LoginScreen = () => {
+const LoginScreen = ({ navigation }) => {
     return (
-        <View style={styles.container}>
+        <FlexScreen style={styles.container}>
             <Image style={styles.logo} source={require('../assets/logo.png')}/>
             <Formik
                 initialValues={{email: "", password: ""}}
-                validationSchema={validationSchema}
-                onSubmit={values => console.log(values)}
+                // validationSchema={validationSchema}
+                onSubmit={() => navigation.navigate('Home')}
             >
                 {() => (
                     <>
@@ -51,25 +50,19 @@ const LoginScreen = () => {
                     </>
                 )}
             </Formik>
-        </View>
+        </FlexScreen>
     );
 };
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
-        alignItems: "center",
         padding: 20,
-        marginTop: Constants.statusBarHeight + 30,
     },
     logo: {
         width: 150,
         height: 190,
         marginVertical: 30
     },
-    button: {
-        marginTop: 20
-    }
 });
 
 export default LoginScreen;

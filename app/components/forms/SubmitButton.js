@@ -1,6 +1,6 @@
 import React from 'react';
 import { useFormikContext } from "formik";
-import { CustomButton } from "../CustomButton";
+import { CustomButton } from "../shared/CustomButton";
 
 const SubmitButton = ({ title, color }) => {
     const { handleSubmit } = useFormikContext();

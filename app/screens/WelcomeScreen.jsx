@@ -1,6 +1,6 @@
 import React from 'react';
 import {StyleSheet, View, ImageBackground, Image, Text} from 'react-native';
-import {CustomButton} from "../components/CustomButton";
+import {CustomButton} from "../components/shared/CustomButton";
 
 const WelcomeScreen = ({ navigation }) => {
     return (

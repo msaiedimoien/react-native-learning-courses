@@ -2,9 +2,8 @@ import React from 'react';
 import { StyleSheet, View, Image } from 'react-native';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
-import Constants from "expo-constants";
-import CustomFormField from "../components/forms/CustomFormField";
-import SubmitButton from "../components/forms/SubmitButton";
+import { CustomFormField, SubmitButton } from '../components/forms';
+import FlexScreen from "../components/shared/FlexScreen";
 
 const validationSchema = Yup.object().shape({
     fullName: Yup.string().required('نام و نام خانوادگی ضروری می باشد'),
@@ -15,7 +14,7 @@ const validationSchema = Yup.object().shape({
 
 const RegisterScreen = () => {
     return (
-        <View style={styles.container}>
+        <FlexScreen style={styles.container}>
             <Image style={styles.logo} source={require('../assets/logo.png')}/>
             <Formik
                 initialValues={{fullName: "", email: "", password: "", passwordConfirm: ""}}
@@ -71,25 +70,19 @@ const RegisterScreen = () => {
                     </>
                 )}
             </Formik>
-        </View>
+        </FlexScreen>
     );
 };
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
-        alignItems: "center",
         padding: 20,
-        marginTop: Constants.statusBarHeight + 30,
     },
     logo: {
         width: 150,
         height: 190,
         marginVertical: 30
     },
-    button: {
-        marginTop: 20
-    }
 });
 
 export default RegisterScreen;
