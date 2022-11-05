@@ -2,7 +2,7 @@ import React from "react";
 import {createBottomTabNavigator} from "@react-navigation/bottom-tabs";
 import CoursesScreen from "../screens/CoursesScreen";
 import AccountScreen from "../screens/AccountScreen";
-import MyCourses from "../screens/MyCourses";
+import MyCoursesScreen from "../screens/MyCoursesScreen";
 import {MaterialCommunityIcons} from "@expo/vector-icons";
 
 const Tab = createBottomTabNavigator();
@@ -39,7 +39,7 @@ const TabsNavigator = () => {
             },
         })
         }>
-            <Tab.Screen name='MyCourses' component={MyCourses} options={{title: 'دوره های من'}} />
+            <Tab.Screen name='MyCourses' component={MyCoursesScreen} options={{title: 'دوره های من'}} />
             <Tab.Screen name='Courses' component={CoursesScreen} options={{title: 'دوره ها'}} />
             <Tab.Screen name='Account' component={AccountScreen} options={{title: 'کاربری من'}} />
         </Tab.Navigator>

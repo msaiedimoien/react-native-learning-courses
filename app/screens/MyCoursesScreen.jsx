@@ -2,7 +2,7 @@ import React from 'react';
 import { Text, StyleSheet } from 'react-native';
 import FlexScreen from "../components/shared/FlexScreen";
 
-const MyCourses = () => {
+const MyCoursesScreen = () => {
   return (
     <FlexScreen>
       <Text>My Courses</Text>
@@ -12,4 +12,4 @@ const MyCourses = () => {
 
 const styles = StyleSheet.create({});
 
-export default MyCourses;
+export default MyCoursesScreen;
