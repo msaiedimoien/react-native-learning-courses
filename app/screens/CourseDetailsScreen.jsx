@@ -1,8 +1,7 @@
 import React from 'react';
-import { Text, StyleSheet, View } from 'react-native';
-import FlexScreen from "../components/shared/FlexScreen";
-import CustomText from "../components/shared/CustomText";
+import { View } from 'react-native';
 import {RFPercentage} from "react-native-responsive-fontsize";
+import CustomCard from "../components/shared/CustomCard";
 
 const CourseDetailsScreen = ({ navigation, route }) => {
     if(!route.params.course) return null;
@@ -19,13 +18,15 @@ const CourseDetailsScreen = ({ navigation, route }) => {
             backgroundColor: 'tomato'
         }
     });
-  return (
-    <FlexScreen>
-        <CustomText fontFamily='byekan' size={2.2}>{route.params.course.title}</CustomText>
-    </FlexScreen>
+
+    const courseInfo= 'لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد. کتابهای زیادی در شصت و سه درصد گذشته، حال و آینده شناخت فراوان جامعه و متخصصان را می طلبد تا با نرم افزارها شناخت بیشتری را برای طراحان رایانه ای علی الخصوص طراحان خلاقی و فرهنگ پیشرو در زبان فارسی ایجاد کرد. در این صورت می توان امید داشت که تمام و دشواری موجود در ارائه راهکارها و شرایط سخت تایپ به پایان رسد وزمان مورد نیاز شامل حروفچینی دستاوردهای اصلی و جوابگوی سوالات پیوسته اهل دنیای موجود طراحی اساسا مورد استفاده قرار گیرد.\n' +
+        'لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد. کتابهای زیادی در شصت و سه درصد گذشته، حال و آینده شناخت فراوان جامعه و متخصصان را می طلبد تا با نرم افزارها شناخت بیشتری را برای طراحان رایانه ای علی الخصوص طراحان خلاقی و فرهنگ پیشرو در زبان فارسی ایجاد کرد. در این صورت می توان امید داشت که تمام و دشواری موجود در ارائه راهکارها و شرایط سخت تایپ به پایان رسد وزمان مورد نیاز شامل حروفچینی دستاوردهای اصلی و جوابگوی سوالات پیوسته اهل دنیای موجود طراحی اساسا مورد استفاده قرار گیرد.';
+
+    return (
+    <View style={{padding: 10}}>
+        <CustomCard item={route.params.course} courseInfo={courseInfo}/>
+    </View>
   );
 };
-
-const styles = StyleSheet.create({});
 
 export default CourseDetailsScreen;

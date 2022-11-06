@@ -35,11 +35,11 @@ const courses = [
         teacher: "یونس قربانی",
         time: "15:00:00",
         image: require("../assets/courses/ReactNative.jpg"),
-    },
+    }
 ];
 
 const CoursesScreen = ({ navigation }) => {
-  return (
+    return (
     <FlexScreen style={styles.container}>
       <FlatList
           data={courses}

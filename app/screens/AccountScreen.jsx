@@ -15,7 +15,7 @@ const AccountScreen = () => {
               <CustomIcon name='cog-outline' size={40} color='tomato' />
           </View>
       </View>
-        <CustomSeparator height={1} />
+        <CustomSeparator height={2} />
         <TouchableOpacity style={[styles.details, {margin: 15}]}>
             <CustomIcon name='logout' size={40} color='tomato' />
             <Text style={styles.title}> خروج از حساب کاربری</Text>
@@ -33,7 +33,8 @@ const styles = StyleSheet.create({
     },
     details: {
         flexDirection: "row",
-        alignItems: "center"
+        alignItems: "center",
+        marginBottom: 20
     },
     image: {
         width: 110,
