@@ -1,10 +1,9 @@
 import React from "react";
 import {createBottomTabNavigator} from "@react-navigation/bottom-tabs";
-import AccountScreen from "../screens/AccountScreen";
-import MyCoursesScreen from "../screens/MyCoursesScreen";
 import {MaterialCommunityIcons} from "@expo/vector-icons";
 import TopTabsNavigator from "./TopTabsNavigator";
 import {RFPercentage} from "react-native-responsive-fontsize";
+import {AccountScreen, MyCoursesScreen} from "../screens";
 
 const Tab = createBottomTabNavigator();
 

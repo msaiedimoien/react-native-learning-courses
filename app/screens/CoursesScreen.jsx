@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, FlatList } from 'react-native';
+import {StyleSheet, FlatList, TouchableOpacity} from 'react-native';
 import FlexScreen from "../components/shared/FlexScreen";
 import CustomCard from "../components/shared/CustomCard";
 
@@ -38,14 +38,16 @@ const courses = [
     },
 ];
 
-const CoursesScreen = () => {
+const CoursesScreen = ({ navigation }) => {
   return (
     <FlexScreen style={styles.container}>
       <FlatList
           data={courses}
           keyExtractor={c => c.id.toString()}
           renderItem={({item}) => (
-              <CustomCard item={item} />
+              <TouchableOpacity onPress={() => navigation.navigate('CourseDetails', {course: item})}>
+                  <CustomCard item={item} />
+              </TouchableOpacity>
           )}
           showsVerticalScrollIndicator={false}
       />
