@@ -4,6 +4,7 @@ import AccountScreen from "../screens/AccountScreen";
 import MyCoursesScreen from "../screens/MyCoursesScreen";
 import {MaterialCommunityIcons} from "@expo/vector-icons";
 import TopTabsNavigator from "./TopTabsNavigator";
+import {RFPercentage} from "react-native-responsive-fontsize";
 
 const Tab = createBottomTabNavigator();
 
@@ -33,11 +34,11 @@ const TabsNavigator = () => {
                 tabBarActiveBackgroundColor: 'whitesmoke',
                 tabBarLabelStyle: {
                     fontFamily: 'byekan',
-                    fontSize: 13,
+                    fontSize: RFPercentage(1.9),
                     marginBottom: 5,
                 },
                 tabBarStyle: {
-                    height: 60
+                    height: RFPercentage(7.5)
                 },
             })
             }>

@@ -1,10 +1,11 @@
 import React from "react";
-import { StyleSheet, Text, TouchableOpacity} from "react-native";
+import { StyleSheet, TouchableOpacity} from "react-native";
+import CustomText from "./CustomText";
 
 export const CustomButton = ({ title, onPress, color = "tomato" }) => {
     return(
         <TouchableOpacity style={[styles.button, {backgroundColor: color}]} onPress={onPress}>
-            <Text style={styles.text}>{title}</Text>
+            <CustomText fontFamily='byekan' size={2.2} styles={styles.text}>{title}</CustomText>
         </TouchableOpacity>
     )
 };
@@ -19,8 +20,6 @@ const styles = StyleSheet.create({
         borderRadius: 15,
     },
     text: {
-        fontFamily: 'byekan',
         color: 'white',
-        fontSize: 18
     },
 });
