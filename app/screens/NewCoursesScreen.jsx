@@ -38,19 +38,19 @@ const courses = [
     },
 ];
 
-const CoursesScreen = () => {
-  return (
-    <FlexScreen style={styles.container}>
-      <FlatList
-          data={courses}
-          keyExtractor={c => c.id.toString()}
-          renderItem={({item}) => (
-              <CustomCard item={item} />
-          )}
-          showsVerticalScrollIndicator={false}
-      />
-    </FlexScreen>
-  );
+const NewCoursesScreen = () => {
+    return (
+        <FlexScreen style={styles.container}>
+            <FlatList
+                data={courses}
+                keyExtractor={c => c.id.toString()}
+                renderItem={({item}) => (
+                    <CustomCard item={item} />
+                )}
+                showsVerticalScrollIndicator={false}
+            />
+        </FlexScreen>
+    );
 };
 
 const styles = StyleSheet.create({
@@ -60,4 +60,4 @@ const styles = StyleSheet.create({
     }
 });
 
-export default CoursesScreen;
+export default NewCoursesScreen;
