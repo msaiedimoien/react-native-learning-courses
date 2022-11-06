@@ -57,6 +57,7 @@ const LoginScreen = ({ navigation }) => {
 const styles = StyleSheet.create({
     container: {
         padding: 20,
+        alignItems: "center"
     },
     logo: {
         width: 150,
