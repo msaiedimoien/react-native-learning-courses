@@ -1,29 +1,11 @@
 import React, {useState} from 'react';
-import {Alert, FlatList, StyleSheet, View} from 'react-native';
+import {Alert, BackHandler, FlatList, StyleSheet, View} from 'react-native';
 import FlexScreen from "../components/shared/FlexScreen";
 import CustomText from "../components/shared/CustomText";
 import CustomSeparator from "../components/shared/CustomSeparator";
 import {Swipeable} from "react-native-gesture-handler";
 import CustomIcon from "../components/shared/CustomIcon";
-
-const confirmationAlert = (course, onPress) => (
-    Alert.alert(
-        'حذف دوره',
-        `واقعا میخوای ${course.title} رو حذف کنی؟`,
-        [
-            {
-                text:'منصرف شدم',
-                onPress: () => {},
-                style: "cancel"
-            },
-            {
-                text: 'اره مطمینم',
-                onPress: onPress
-            }
-        ],
-        {cancelable: false}
-    )
-);
+import CustomAlert from "../components/shared/CustomAlert";
 
 const deleteAction = (course, onPress) => {
     return (
@@ -38,7 +20,11 @@ const deleteAction = (course, onPress) => {
                 name='trash-can-outline'
                 size={40}
                 color='white'
-                onPress={() => confirmationAlert(course, onPress)}
+                onPress={() => CustomAlert({typeAlert:'yesNo',
+                    title: 'اتصال به سرور',
+                    message: `مطمینی که میخوای ${course.title} رو حذف کنی؟`,
+                    onPressYesOK: onPress})
+                }
             />
         </View>
     )

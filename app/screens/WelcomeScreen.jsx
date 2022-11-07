@@ -1,9 +1,25 @@
-import React from 'react';
-import {StyleSheet, View, ImageBackground, Image} from 'react-native';
+import React, {useEffect} from 'react';
+import {StyleSheet, View, ImageBackground, Image, BackHandler} from 'react-native';
 import {CustomButton} from "../components/shared/CustomButton";
 import CustomText from "../components/shared/CustomText";
+import NetInfo from '@react-native-community/netinfo';
+import CustomAlert from "../components/shared/CustomAlert";
 
 const WelcomeScreen = ({ navigation }) => {
+
+    useEffect(() => {
+        const internetChecking = async () => {
+            const state = await NetInfo.fetch();
+            if(!state.isConnected){
+                CustomAlert({typeAlert:'OK',
+                    title: 'اتصال به سرور',
+                    message: 'برای استفاده از اپلیکیشن باید به اینترنت متصل باشید.',
+                    onPressYesOK: BackHandler.exitApp});
+            }
+        }
+        internetChecking();
+    }, []);
+
     return (
         <ImageBackground style={styles.background} blurRadius={3} source={require('../assets/bg4.jpg')}>
             <View style={styles.firstContainer}>
