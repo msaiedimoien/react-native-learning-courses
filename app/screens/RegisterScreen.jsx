@@ -1,10 +1,12 @@
 import React, {useState} from 'react';
-import {StyleSheet, View, Image, ActivityIndicator} from 'react-native';
+import {StyleSheet, View, Image} from 'react-native';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 import { CustomFormField, SubmitButton } from '../components/forms';
 import FlexScreen from "../components/shared/FlexScreen";
 import {registerUser} from "../api/users";
+import {useToast} from "react-native-toast-notifications";
+import {loadingToast, normalToast, warningToast} from "../utils/toasts";
 
 const validationSchema = Yup.object().shape({
     fullname: Yup.string().required('نام و نام خانوادگی ضروری می باشد'),
@@ -14,20 +16,22 @@ const validationSchema = Yup.object().shape({
 });
 
 const RegisterScreen = ({ navigation }) => {
-    const [loading, setLoading] = useState(false);
+    const toast = useToast();
 
     const handleUserRegister = async(user) => {
       try {
+          loadingToast('ثبت نام کاربر...');
           const status = await registerUser(user);
 
           if(status === 201){
-              navigation.navigate('Login');
+              toast.hideAll();
+              navigation.navigate('Login', {successRegister: true});
           }else{
-              console.log('Server error.');
+              toast.hideAll();
+              warningToast('توجه: متاسفانه خطایی رخ داده است.');
           }
-          setLoading(false);
       }catch (err) {
-          console.log(err);
+          warningToast('توجه: متاسفانه خطایی رخ داده است.');
       }
     }
 
@@ -38,8 +42,6 @@ const RegisterScreen = ({ navigation }) => {
                 initialValues={{fullname: "", email: "", password: "", passwordConfirmation: ""}}
                 validationSchema={validationSchema}
                 onSubmit={user => {
-                    setLoading(true);
-                    // console.log(user);
                     handleUserRegister(user);
                 }}
             >
@@ -87,12 +89,11 @@ const RegisterScreen = ({ navigation }) => {
                         />
                         <View style={{marginBottom: 10}}/>
                         <View style={{width: '90%'}}>
-                            <SubmitButton title='ثبت' color='tomato'/>
+                            <SubmitButton title='ثبت کاربر' color='tomato'/>
                         </View>
                     </>
                 )}
             </Formik>
-            {loading ? <ActivityIndicator animating={loading} size="large" style={{flex: 1}}/> : null}
         </FlexScreen>
     );
 };

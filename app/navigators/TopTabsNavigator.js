@@ -5,28 +5,34 @@ import {CoursesScreen, NewCoursesScreen, TopCoursesScreen} from "../screens";
 import {RFPercentage} from "react-native-responsive-fontsize";
 import CoursesContext from "../contexts/CoursesContext";
 import {fetchCourses} from "../api/courses";
-import {ActivityIndicator} from "react-native";
+import { useToast } from "react-native-toast-notifications";
+import {loadingToast} from "../utils/toasts";
 
 const TopTabs = createMaterialTopTabNavigator();
 
 const TopTabsNavigator = () => {
-    const [loading, setLoading] = useState(true);
+    const toast = useToast();
     const [getCourses, setCourses] = useState([]);
 
     useEffect(() => {
-        setLoading(true);
-        const fetchData = async () => {
-            const courses = await fetchCourses();
-            setCourses(courses);
-            setLoading(false);
-        };
-        fetchData();
+        try {
+            const fetchData = async () => {
+
+                loadingToast('در حال بارگذاری...');
+                const courses = await fetchCourses();
+                setCourses(courses);
+                toast.hideAll();
+            };
+            fetchData();
+        }catch (err) {
+            console.log(err);
+            toast.hideAll();
+        }
     }, []);
 
     return (
         <CoursesContext.Provider value={{
             courses: getCourses,
-            loadind: loading,
         }}>
             <FlexScreen>
                 <TopTabs.Navigator
@@ -50,7 +56,6 @@ const TopTabsNavigator = () => {
 
                 </TopTabs.Navigator>
             </FlexScreen>
-            {loading ? <ActivityIndicator animating={loading} size="large" style={{flex: 1}}/> : null}
         </CoursesContext.Provider>
     );
 };

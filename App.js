@@ -2,6 +2,7 @@ import React, {useEffect} from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { I18nManager } from "react-native";
 import StackNavigator from "./app/navigators/StackNavigator";
+import { ToastProvider } from 'react-native-toast-notifications'
 import {useFonts} from "expo-font";
 import * as SplashScreen from "expo-splash-screen";
 
@@ -30,9 +31,11 @@ const App = () => {
     };
 
     return(
-        <NavigationContainer>
-            <StackNavigator />
-        </NavigationContainer>
+        <ToastProvider>
+            <NavigationContainer>
+                <StackNavigator />
+            </NavigationContainer>
+        </ToastProvider>
     )
 };
 
