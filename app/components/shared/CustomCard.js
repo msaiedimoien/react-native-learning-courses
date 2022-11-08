@@ -15,8 +15,10 @@ const CustomCard = ({item, showInfo}) => {
             <View style={{padding: 20}}>
                 <CustomText fontFamily='byekan' size={2} styles={styles.title}>{item.title}</CustomText>
                 <View style={styles.details}>
-                    <CustomText fontFamily='byekan'
-                                size={1.7}>{`قیمت: ${numberWithCommas(item.price)} تومان`}</CustomText>
+                    <CustomText fontFamily='byekan' size={1.7}>
+                        قیمت:
+                        {item.price === 0 ? 'رایگان' : `${numberWithCommas(item.price)} تومان`}
+                    </CustomText>
                     <CustomText fontFamily='byekan' size={1.7}>زمان: 15:00:00</CustomText>
                 </View>
                 <CustomText fontFamily='ih' size={2} styles={styles.teacher}>مدرس دوره: مصطفی سعیدی معین</CustomText>

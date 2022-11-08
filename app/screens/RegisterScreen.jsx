@@ -1,30 +1,52 @@
-import React from 'react';
-import { StyleSheet, View, Image } from 'react-native';
+import React, {useState} from 'react';
+import {StyleSheet, View, Image, ActivityIndicator} from 'react-native';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 import { CustomFormField, SubmitButton } from '../components/forms';
 import FlexScreen from "../components/shared/FlexScreen";
+import {registerUser} from "../api/users";
 
 const validationSchema = Yup.object().shape({
-    fullName: Yup.string().required('نام و نام خانوادگی ضروری می باشد'),
+    fullname: Yup.string().required('نام و نام خانوادگی ضروری می باشد'),
     email: Yup.string().required('ایمیل کاربری ضروری می باشد').email('ایمیل وارد شده معتبر نمی باشد'),
     password: Yup.string().required('کلمه عبور ضروری می باشد').min(6, 'پسورد نباید کمتر از 6 کاراکتر باشد'),
-    passwordConfirm: Yup.string().required('تکرار کلمه عبور ضروری می باشد').oneOf([Yup.ref('password'), null], 'کلمه های عبور باید یکسان باشند'),
+    passwordConfirmation: Yup.string().required('تکرار کلمه عبور ضروری می باشد').oneOf([Yup.ref('password'), null], 'کلمه های عبور باید یکسان باشند'),
 });
 
-const RegisterScreen = () => {
+const RegisterScreen = ({ navigation }) => {
+    const [loading, setLoading] = useState(false);
+
+    const handleUserRegister = async(user) => {
+      try {
+          const status = await registerUser(user);
+
+          if(status === 201){
+              navigation.navigate('Login');
+          }else{
+              console.log('Server error.');
+          }
+          setLoading(false);
+      }catch (err) {
+          console.log(err);
+      }
+    }
+
     return (
         <FlexScreen style={styles.container}>
             <Image style={styles.logo} source={require('../assets/logo.png')}/>
             <Formik
-                initialValues={{fullName: "", email: "", password: "", passwordConfirm: ""}}
+                initialValues={{fullname: "", email: "", password: "", passwordConfirmation: ""}}
                 validationSchema={validationSchema}
-                onSubmit={values => console.log(values)}
+                onSubmit={user => {
+                    setLoading(true);
+                    // console.log(user);
+                    handleUserRegister(user);
+                }}
             >
                 {() => (
                     <>
                         <CustomFormField
-                            name='fullName'
+                            name='fullname'
                             iconName='account'
                             iconColor='orangered'
                             autoCorrect={false}
@@ -54,7 +76,7 @@ const RegisterScreen = () => {
                             secureTextEntry
                         />
                         <CustomFormField
-                            name='passwordConfirm'
+                            name='passwordConfirmation'
                             iconName='lock'
                             iconColor='orangered'
                             autoCorrect={false}
@@ -70,6 +92,7 @@ const RegisterScreen = () => {
                     </>
                 )}
             </Formik>
+            {loading ? <ActivityIndicator animating={loading} size="large" style={{flex: 1}}/> : null}
         </FlexScreen>
     );
 };
