@@ -5,6 +5,8 @@ import StackNavigator from "./app/navigators/StackNavigator";
 import { ToastProvider } from 'react-native-toast-notifications'
 import {useFonts} from "expo-font";
 import * as SplashScreen from "expo-splash-screen";
+import {Provider} from "react-redux";
+import {store} from "./app/redux/store";
 
 SplashScreen.preventAutoHideAsync();
 
@@ -28,12 +30,15 @@ const App = () => {
 
     if (!fontsLoaded) {
         return null;
-    };
+    }
+    ;
 
-    return(
+    return (
         <ToastProvider>
             <NavigationContainer>
-                <StackNavigator />
+                <Provider store={store}>
+                    <StackNavigator/>
+                </Provider>
             </NavigationContainer>
         </ToastProvider>
     )

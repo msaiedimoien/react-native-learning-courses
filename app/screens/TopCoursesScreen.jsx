@@ -3,14 +3,15 @@ import { StyleSheet, FlatList } from 'react-native';
 import FlexScreen from "../components/shared/FlexScreen";
 import CustomCard from "../components/shared/CustomCard";
 import CoursesContext from "../contexts/CoursesContext";
+import {useSelector} from "react-redux";
 
 const TopCoursesScreen = () => {
-    const context = useContext(CoursesContext);
+    const courses = useSelector(state => state.courses);
 
     return (
         <FlexScreen style={styles.container}>
             <FlatList
-                data={context.courses}
+                data={courses}
                 keyExtractor={c => c._id.toString()}
                 renderItem={({item}) => (
                     <CustomCard item={item} />

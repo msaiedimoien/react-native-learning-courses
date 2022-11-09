@@ -7,10 +7,13 @@ import CustomAlert from "../components/shared/CustomAlert";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import {decodeToken} from "../utils/jwt";
 import {StackActions, useNavigationState} from "@react-navigation/native";
+import {useDispatch} from "react-redux";
+import {userAction} from "../redux/actions";
 
 const WelcomeScreen = ({ navigation }) => {
-
+    const dispatch = useDispatch();
     const screenIndex = useNavigationState((state) => state.index);
+
     useEffect(() => {
         let currentCount = 0;
 
@@ -34,9 +37,6 @@ const WelcomeScreen = ({ navigation }) => {
 
     useEffect(() => {
         const internetChecking = async () => {
-            // await AsyncStorage.removeItem("token");
-            // await AsyncStorage.removeItem("userId");
-
             const state = await NetInfo.fetch();
             if (!state.isConnected) {
                 CustomAlert({
@@ -52,8 +52,9 @@ const WelcomeScreen = ({ navigation }) => {
                 if (token !== null && userId !== null) {
                     const decodedToken = decodeToken(token);
 
+                    dispatch(userAction(decodedToken.user));
+
                     if (decodedToken.user.userId === userId)
-                        // navigation.navigate('Home');
                         navigation.dispatch(
                             StackActions.replace('Home')
                         );

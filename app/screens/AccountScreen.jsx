@@ -5,8 +5,10 @@ import CustomIcon from "../components/shared/CustomIcon";
 import CustomSeparator from "../components/shared/CustomSeparator";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import {StackActions} from "@react-navigation/native";
+import {useSelector} from "react-redux";
 
 const AccountScreen = ({ navigation }) => {
+    const user = useSelector(state => state.user);
 
   const handleLogout = async () => {
       await AsyncStorage.removeItem('token');
@@ -19,8 +21,8 @@ const AccountScreen = ({ navigation }) => {
       <View style={styles.details}>
           <Image style={styles.image} source={require('../assets/msPhoto.jpg')} />
           <View>
-              <Text style={styles.title}>مصطفی سعیدی معین</Text>
-              <Text style={styles.subTitle}>msaiedimoien@yahoo.com</Text>
+              <Text style={styles.title}>{user.fullname}</Text>
+              <Text style={styles.subTitle}>{user.email}</Text>
               <CustomIcon name='cog-outline' size={40} color='tomato' />
           </View>
       </View>
