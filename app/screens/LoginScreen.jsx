@@ -41,7 +41,11 @@ const LoginScreen = ({ navigation, route }) => {
             const status = await loginUser(user);
             if(status===200){
                 toast.hideAll();
-                navigation.navigate('Home');
+                // navigation.navigate('Home');
+                navigation.reset({
+                    index: 0,
+                    routes: [{name: 'Home'}]
+                });
             }else{
                 toast.hideAll();
                 customToast('warning', 'ایمیل کاربری یا کلمه عبور صحیح نمی باشد.');

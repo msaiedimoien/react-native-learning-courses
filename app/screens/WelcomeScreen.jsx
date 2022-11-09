@@ -6,11 +6,37 @@ import NetInfo from '@react-native-community/netinfo';
 import CustomAlert from "../components/shared/CustomAlert";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import {decodeToken} from "../utils/jwt";
+import {StackActions, useNavigationState} from "@react-navigation/native";
 
 const WelcomeScreen = ({ navigation }) => {
 
+    const screenIndex = useNavigationState((state) => state.index);
+    useEffect(() => {
+        let currentCount = 0;
+
+        if (screenIndex <= 0) {
+            BackHandler.addEventListener("hardwareBackPress", () => {
+                if (currentCount === 1) {
+                    BackHandler.exitApp();
+                    return true;
+                }
+
+                currentCount += 1;
+
+                setTimeout(() => {
+                    currentCount = 0;
+                }, 1000);
+
+                return true;
+            });
+        }
+    }, []);
+
     useEffect(() => {
         const internetChecking = async () => {
+            // await AsyncStorage.removeItem("token");
+            // await AsyncStorage.removeItem("userId");
+
             const state = await NetInfo.fetch();
             if (!state.isConnected) {
                 CustomAlert({
@@ -27,7 +53,10 @@ const WelcomeScreen = ({ navigation }) => {
                     const decodedToken = decodeToken(token);
 
                     if (decodedToken.user.userId === userId)
-                        navigation.navigate('Home');
+                        // navigation.navigate('Home');
+                        navigation.dispatch(
+                            StackActions.replace('Home')
+                        );
                     else {
                         await AsyncStorage.removeItem("token");
                         await AsyncStorage.removeItem("userId");

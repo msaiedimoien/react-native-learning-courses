@@ -10,9 +10,8 @@ const Tab = createBottomTabNavigator();
 const TabsNavigator = () => {
     return (
         <Tab.Navigator
-            initialRouteName='Courses'
+            initialRouteName="Courses"
             screenOptions={({route}) => ({
-                headerShown: false,
                 tabBarIcon: ({focused, color, size}) => {
                     let iconName;
 
@@ -28,6 +27,7 @@ const TabsNavigator = () => {
                         <MaterialCommunityIcons name={iconName} color={color} size={size}/>
                     )
                 },
+                headerShown: false,
                 tabBarActiveTintColor: 'tomato',
                 tabBarInactiveTintColor: 'gray',
                 tabBarActiveBackgroundColor: 'whitesmoke',

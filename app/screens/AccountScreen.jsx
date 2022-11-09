@@ -3,8 +3,17 @@ import {Text, StyleSheet, View, Image, TouchableOpacity} from 'react-native';
 import FlexScreen from "../components/shared/FlexScreen";
 import CustomIcon from "../components/shared/CustomIcon";
 import CustomSeparator from "../components/shared/CustomSeparator";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import {StackActions} from "@react-navigation/native";
 
-const AccountScreen = () => {
+const AccountScreen = ({ navigation }) => {
+
+  const handleLogout = async () => {
+      await AsyncStorage.removeItem('token');
+      await AsyncStorage.removeItem('userId');
+      navigation.dispatch(StackActions.replace('Welcome'));
+  };
+
   return (
     <FlexScreen style={styles.screen}>
       <View style={styles.details}>
@@ -16,8 +25,8 @@ const AccountScreen = () => {
           </View>
       </View>
         <CustomSeparator height={2} />
-        <TouchableOpacity style={[styles.details, {margin: 15}]}>
-            <CustomIcon name='logout' size={40} color='tomato' />
+        <TouchableOpacity style={[styles.details, {margin: 15}]} onPress={handleLogout}>
+            <CustomIcon name='logout' size={40} color='tomato' onPress={handleLogout} />
             <Text style={styles.title}> خروج از حساب کاربری</Text>
         </TouchableOpacity>
     </FlexScreen>
