@@ -18,7 +18,7 @@ const TopTabsNavigator = () => {
         try {
             const fetchData = async () => {
 
-                loadingToast('در حال بارگذاری...');
+                customToast('normal', 'در حال بارگذاری...', 60000);
                 const courses = await fetchCourses();
                 setCourses(courses);
                 toast.hideAll();
@@ -29,6 +29,20 @@ const TopTabsNavigator = () => {
             toast.hideAll();
         }
     }, []);
+
+    const customToast = (type, message, duration= 4000) => {
+        let id = toast.show(message, {
+            animationType: 'slide-in',
+            animationDuration: 500,
+            duration,
+            placement: "center",
+            type: type,
+            textStyle: {
+                fontFamily: 'byekan',
+                fontSize: RFPercentage(2),
+            },
+        });
+    };
 
     return (
         <CoursesContext.Provider value={{

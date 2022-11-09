@@ -1,11 +1,21 @@
-import React, {useContext} from 'react';
+import React, {useContext, useEffect} from 'react';
 import {StyleSheet, FlatList, TouchableOpacity, ActivityIndicator} from 'react-native';
 import FlexScreen from "../components/shared/FlexScreen";
 import CustomCard from "../components/shared/CustomCard";
 import CoursesContext from "../contexts/CoursesContext";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import {decodeToken} from "../utils/jwt";
 
 const CoursesScreen = ({ navigation }) => {
     const context = useContext(CoursesContext);
+
+    // useEffect(() => {
+    //     const getDecodeToken = async () => {
+    //         const token = await AsyncStorage.getItem('token');
+    //         console.log(decodeToken(token));
+    //     }
+    //     getDecodeToken();
+    // }, []);
 
     return (
         <FlexScreen style={styles.container}>

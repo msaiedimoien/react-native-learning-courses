@@ -4,17 +4,36 @@ import {CustomButton} from "../components/shared/CustomButton";
 import CustomText from "../components/shared/CustomText";
 import NetInfo from '@react-native-community/netinfo';
 import CustomAlert from "../components/shared/CustomAlert";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import {decodeToken} from "../utils/jwt";
 
 const WelcomeScreen = ({ navigation }) => {
 
     useEffect(() => {
         const internetChecking = async () => {
             const state = await NetInfo.fetch();
-            if(!state.isConnected){
-                CustomAlert({typeAlert:'OK',
+            if (!state.isConnected) {
+                CustomAlert({
+                    typeAlert: 'OK',
                     title: 'اتصال به سرور',
                     message: 'برای استفاده از اپلیکیشن باید به اینترنت متصل باشید.',
-                    onPressYesOK: BackHandler.exitApp});
+                    onPressYesOK: BackHandler.exitApp
+                });
+            } else {
+                const token = await AsyncStorage.getItem("token");
+                const userId = JSON.parse(await AsyncStorage.getItem("userId"));
+
+                if (token !== null && userId !== null) {
+                    const decodedToken = decodeToken(token);
+
+                    if (decodedToken.user.userId === userId)
+                        navigation.navigate('Home');
+                    else {
+                        await AsyncStorage.removeItem("token");
+                        await AsyncStorage.removeItem("userId");
+                        navigation.navigate('Login');
+                    }
+                }
             }
         }
         internetChecking();

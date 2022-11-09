@@ -1,4 +1,5 @@
 import http from './';
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export const registerUser = async (user) => {
     try {
@@ -7,6 +8,18 @@ export const registerUser = async (user) => {
             JSON.stringify(user));
         return status;
     }catch (err) {
+        console.log(err);
+    }
+};
+
+export const loginUser = async (user) => {
+    try {
+        const { data, status } = await http.post(`${http.url}/login`,
+            JSON.stringify(user));
+        await AsyncStorage.setItem('token', JSON.stringify(data.token));
+        await AsyncStorage.setItem('userId', JSON.stringify(data.userId));
+        return status;
+    } catch (err) {
         console.log(err);
     }
 };
