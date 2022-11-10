@@ -1,8 +1,7 @@
-import React, {useContext} from 'react';
+import React from 'react';
 import { StyleSheet, FlatList } from 'react-native';
 import FlexScreen from "../components/shared/FlexScreen";
 import CustomCard from "../components/shared/CustomCard";
-import CoursesContext from "../contexts/CoursesContext";
 import {useSelector} from "react-redux";
 
 const TopCoursesScreen = () => {

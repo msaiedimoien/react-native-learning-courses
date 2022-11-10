@@ -1,8 +1,8 @@
-import {combineReducers} from "@reduxjs/toolkit";
+import {combineReducers} from "redux";
 import {coursesReducer} from "./coursesReducer";
-import {usersReducers} from "./usersReducers";
+import {usersReducer} from "./usersReducers";
 
 export const reducers = combineReducers({
     courses: coursesReducer,
-    user: usersReducers,
+    user: usersReducer,
 });

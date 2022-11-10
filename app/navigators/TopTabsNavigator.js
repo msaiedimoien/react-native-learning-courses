@@ -1,12 +1,9 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect} from 'react';
 import {createMaterialTopTabNavigator} from "@react-navigation/material-top-tabs";
 import FlexScreen from "../components/shared/FlexScreen";
 import {CoursesScreen, NewCoursesScreen, TopCoursesScreen} from "../screens";
 import {RFPercentage} from "react-native-responsive-fontsize";
-import CoursesContext from "../contexts/CoursesContext";
-import {fetchCourses} from "../api/courses";
 import { useToast } from "react-native-toast-notifications";
-import {loadingToast} from "../utils/toasts";
 import {useDispatch} from "react-redux";
 import {getCourses} from "../redux/actions";
 
@@ -20,14 +17,14 @@ const TopTabsNavigator = () => {
         try {
             const fetchData = async () => {
 
-                customToast('normal', 'در حال بارگذاری...', 60000);
+                customToast('normal', 'در حال بارگذاری...');
                 dispatch(getCourses());
-                toast.hideAll();
+                // toast.hideAll();
             };
             fetchData();
         } catch (err) {
             console.log(err);
-            toast.hideAll();
+            // toast.hideAll();
         }
     }, []);
 

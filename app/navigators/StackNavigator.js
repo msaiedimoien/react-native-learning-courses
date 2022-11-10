@@ -11,7 +11,7 @@ const StackNavigator = () => {
             <Stack.Screen name='Login' component={LoginScreen} initialParams={{successRegister: false}}/>
             <Stack.Screen name='Register' component={RegisterScreen}/>
             <Stack.Screen name='Home' component={TabsNavigator}/>
-            <Stack.Screen name='CourseDetails' component={CourseDetailsScreen}/>
+            <Stack.Screen name='CourseDetails' component={CourseDetailsScreen} />
         </Stack.Navigator>
     );
 };
