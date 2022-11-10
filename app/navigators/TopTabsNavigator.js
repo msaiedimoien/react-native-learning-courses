@@ -17,7 +17,7 @@ const TopTabsNavigator = () => {
         try {
             const fetchData = async () => {
 
-                customToast('normal', 'در حال بارگذاری...');
+                // customToast('normal', 'در حال بارگذاری...');
                 dispatch(getCourses());
                 // toast.hideAll();
             };
