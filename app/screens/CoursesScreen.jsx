@@ -5,7 +5,7 @@ import CustomCard from "../components/shared/CustomCard";
 import {useSelector} from "react-redux";
 
 const CoursesScreen = ({ navigation }) => {
-    const courses = useSelector(state => state.courses);
+    const courses = useSelector((state) => state.courses);
 
     return (
         <FlexScreen style={styles.container}>
@@ -13,7 +13,10 @@ const CoursesScreen = ({ navigation }) => {
                 data={courses}
                 keyExtractor={c => c._id.toString()}
                 renderItem={({item}) => (
-                    <TouchableOpacity onPress={() => navigation.navigate('CourseDetails', {course: item,})}>
+                    <TouchableOpacity
+                        onPress={() =>
+                            navigation.navigate("CourseDetails",
+                                {course: item,})}>
                         <CustomCard item={item} showInfo={false}/>
                     </TouchableOpacity>
                 )}

@@ -1,11 +1,30 @@
 import React, {useState} from 'react';
-import {Alert, BackHandler, FlatList, StyleSheet, View} from 'react-native';
+import {Alert, FlatList, StyleSheet, View} from 'react-native';
 import FlexScreen from "../components/shared/FlexScreen";
 import CustomText from "../components/shared/CustomText";
 import CustomSeparator from "../components/shared/CustomSeparator";
 import {Swipeable} from "react-native-gesture-handler";
 import CustomIcon from "../components/shared/CustomIcon";
 import CustomAlert from "../components/shared/CustomAlert";
+
+const confirmationAlert = (course, onPress) => {
+    return Alert.alert(
+        course.title,
+        `مطمئنی می خوای  ${course.title} رو از لیست دوره هات پاک کنی`,
+        [
+            {
+                text: "انصراف",
+                onPress: () => {},
+                style: "cancel",
+            },
+            {
+                text: "آره ، پاک کن",
+                onPress: onPress,
+            },
+        ],
+        { cancelable: false }
+    );
+};
 
 const deleteAction = (course, onPress) => {
     return (
@@ -20,11 +39,7 @@ const deleteAction = (course, onPress) => {
                 name='trash-can-outline'
                 size={40}
                 color='white'
-                onPress={() => CustomAlert({typeAlert:'yesNo',
-                    title: 'اتصال به سرور',
-                    message: `مطمینی که میخوای ${course.title} رو حذف کنی؟`,
-                    onPressYesOK: onPress})
-                }
+                onPress={() => confirmationAlert(course, onPress)}
             />
         </View>
     )
@@ -32,11 +47,11 @@ const deleteAction = (course, onPress) => {
 
 const MyCoursesScreen = () => {
     const [getMyCourses, setMyCourse] = useState([
-        {id: 1, title: "دوره جامع NodeJs", master: "یونس قربانی"},
-        {id: 2, title: "دوره جامع React Native", master: "یونس قربانی"},
-        {id: 3, title: "دوره جامع ReactJs", master: "یونس قربانی"},
-        {id: 4, title: "دوره جامع ElectronJs", master: "یونس قربانی"},
-        {id: 5, title: "دوره جامع جاوااسکریپت", master: "یونس قربانی"},
+        {id: 1, title: "دوره جامع NodeJs", master: "مصطفی سعیدی"},
+        {id: 2, title: "دوره جامع React Native", master: "مصطفی سعیدی"},
+        {id: 3, title: "دوره جامع ReactJs", master: "مصطفی سعیدی"},
+        {id: 4, title: "دوره جامع ElectronJs", master: "مصطفی سعیدی"},
+        {id: 5, title: "دوره جامع جاوااسکریپت", master: "مصطفی سعیدی"},
     ]);
 
     const handleDelete = (course) => {

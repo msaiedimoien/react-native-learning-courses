@@ -20,7 +20,7 @@ const AccountScreen = ({ navigation }) => {
 
     const pickImage = async () => {
         let result = await ImagePicker.launchCameraAsync({
-            mediaTypes: ImagePicker.MediaTypeOptions.All,
+            mediaTypes: ImagePicker.MediaTypeOptions.Images,
             allowsEditing: true,
             aspect: [4, 4],
             quality: 1,
@@ -37,7 +37,7 @@ const AccountScreen = ({ navigation }) => {
                 <TouchableOpacity onPress={pickImage}>
                     {image
                         ? <Image source={{uri: image}} style={styles.image}/>
-                        : <Image style={styles.image} source={require('../assets/msPhoto.jpg')}/>}
+                        : <Image style={styles.image} source={require('../assets/Avatar.jpg')}/>}
                 </TouchableOpacity>
                 <View>
                     <Text style={styles.title}>{user.fullname}</Text>
@@ -67,8 +67,8 @@ const styles = StyleSheet.create({
         marginBottom: 20
     },
     image: {
-        width: 110,
-        height: 110,
+        width: 100,
+        height: 100,
         borderRadius: 50,
         marginHorizontal: 10
     },

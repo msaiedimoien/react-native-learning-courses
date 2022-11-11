@@ -39,9 +39,8 @@ const TabsNavigator = () => {
                 tabBarStyle: {
                     height: RFPercentage(7.5)
                 },
-            })
-            }>
-            <Tab.Screen name='MyCourses' component={MyCoursesScreen} options={{title: 'دوره های من'}}/>
+            })}>
+            <Tab.Screen name='MyCourses' component={MyCoursesScreen} options={{title: 'دوره های من', tabBarBadge: 5,}}/>
             <Tab.Screen name='Courses' component={TopTabsNavigator} options={{title: 'دوره ها'}}/>
             <Tab.Screen name='Account' component={AccountScreen} options={{title: 'کاربری من'}}/>
         </Tab.Navigator>

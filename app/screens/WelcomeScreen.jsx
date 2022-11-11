@@ -1,14 +1,21 @@
-import React, {useEffect} from 'react';
-import {StyleSheet, View, ImageBackground, Image, BackHandler} from 'react-native';
-import {CustomButton} from "../components/shared/CustomButton";
-import CustomText from "../components/shared/CustomText";
-import NetInfo from '@react-native-community/netinfo';
-import CustomAlert from "../components/shared/CustomAlert";
+import React, { useEffect } from "react";
+import NetInfo from "@react-native-community/netinfo";
+import { StackActions, useNavigationState } from "@react-navigation/native";
+import {
+    Alert,
+    View,
+    StyleSheet,
+    Image,
+    ImageBackground,
+    BackHandler,
+} from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { useDispatch } from "react-redux";
+import { userAction } from "../redux/actions";
+import CustomAlert from "../components/shared/CustomAlert";
+import CustomText from "../components/shared/CustomText";
+import {CustomButton} from "../components/shared/CustomButton";
 import {decodeToken} from "../utils/jwt";
-import {StackActions, useNavigationState} from "@react-navigation/native";
-import {useDispatch} from "react-redux";
-import {userAction} from "../redux/actions";
 
 const WelcomeScreen = ({ navigation }) => {
     const dispatch = useDispatch();
@@ -45,7 +52,8 @@ const WelcomeScreen = ({ navigation }) => {
                     message: 'برای استفاده از اپلیکیشن باید به اینترنت متصل باشید.',
                     onPressYesOK: BackHandler.exitApp
                 });
-            } else {
+            }
+            else {
                 const token = await AsyncStorage.getItem("token");
                 const userId = JSON.parse(await AsyncStorage.getItem("userId"));
 
@@ -55,17 +63,15 @@ const WelcomeScreen = ({ navigation }) => {
                     dispatch(userAction(decodedToken.user));
 
                     if (decodedToken.user.userId === userId)
-                        navigation.dispatch(
-                            StackActions.replace('Home')
-                        );
+                        navigation.dispatch(StackActions.replace('Home'));
                     else {
                         await AsyncStorage.removeItem("token");
                         await AsyncStorage.removeItem("userId");
-                        navigation.navigate('Login');
+                        navigation.navigate("Login");
                     }
                 }
             }
-        }
+        };
         internetChecking();
     }, []);
 

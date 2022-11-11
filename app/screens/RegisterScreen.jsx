@@ -5,8 +5,6 @@ import * as Yup from 'yup';
 import { CustomFormField, SubmitButton } from '../components/forms';
 import FlexScreen from "../components/shared/FlexScreen";
 import {registerUser} from "../api/users";
-import {useToast} from "react-native-toast-notifications";
-import {RFPercentage} from "react-native-responsive-fontsize";
 
 const validationSchema = Yup.object().shape({
     fullname: Yup.string().required('نام و نام خانوادگی ضروری می باشد'),
@@ -16,36 +14,21 @@ const validationSchema = Yup.object().shape({
 });
 
 const RegisterScreen = ({ navigation }) => {
-    const toast = useToast();
-
-    const customToast = (type, message, duration= 4000) => {
-        let id = toast.show(message, {
-            animationType: 'slide-in',
-            animationDuration: 500,
-            duration,
-            placement: "center",
-            type: type,
-            textStyle: {
-                fontFamily: 'byekan',
-                fontSize: RFPercentage(2),
-            },
-        });
-    };
 
     const handleUserRegister = async(user) => {
         try {
-            customToast('normal', 'ثبت نام کاربر...', 60000);
+            // customToast('normal', 'ثبت نام کاربر...', 60000);
             const status = await registerUser(user);
 
             if (status === 201) {
-                toast.hideAll();
+                // toast.hideAll();
                 navigation.navigate('Login', {successRegister: true});
             } else {
-                toast.hideAll();
-                customToast('warning', 'توجه: متاسفانه خطایی رخ داده است.');
+                // toast.hideAll();
+                // customToast('warning', 'توجه: متاسفانه خطایی رخ داده است.');
             }
         } catch (err) {
-            customToast('warning', 'توجه: متاسفانه خطایی رخ داده است.');
+            // customToast('warning', 'توجه: متاسفانه خطایی رخ داده است.');
         }
     };
 

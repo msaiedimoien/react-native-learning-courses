@@ -22,22 +22,22 @@ const CustomCard = ({item, showInfo}) => {
                     <CustomText fontFamily='byekan' size={1.7}>زمان: 15:00:00</CustomText>
                 </View>
                 <CustomText fontFamily='ih' size={2} styles={styles.teacher}>مدرس دوره: مصطفی سعیدی معین</CustomText>
-                {item.info && showInfo ? (
-                    <View>
-                        <CustomText fontFamily='byekan' size={2.2} styles={{marginTop: 20}}>توضیحات دوره:</CustomText>
-                        <ScrollView >
-                            <CustomText fontFamily='ih' size={1.6} styles={styles.courseInfo}>{item.info}</CustomText>
-                        </ScrollView>
-                    </View>
-                ) : null}
             </View>
+            {item.info && showInfo ? (
+                <View style={{flex: 1, padding: 20, paddingTop:0}}>
+                    <CustomText fontFamily='byekan' size={2.2}>توضیحات دوره:</CustomText>
+                    <ScrollView>
+                        <CustomText fontFamily='ih' size={1.6} styles={styles.courseInfo}>{item.info}</CustomText>
+                    </ScrollView>
+                </View>
+            ) : null}
         </View>
     );
 };
 
 const styles = StyleSheet.create({
     card: {
-        // flex: 1,
+        flex: 1,
         backgroundColor: 'white',
         borderRadius: 10,
         marginBottom: 20,
@@ -59,7 +59,6 @@ const styles = StyleSheet.create({
         textAlign: "center"
     },
     courseInfo: {
-        // flex: 1,
         textAlign: "justify",
         lineHeight: 20,
     }

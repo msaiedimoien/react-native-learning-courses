@@ -5,8 +5,6 @@ import * as Yup from 'yup';
 import { CustomFormField, SubmitButton } from '../components/forms';
 import FlexScreen from "../components/shared/FlexScreen";
 import {loginUser} from "../api/users";
-import {useToast} from "react-native-toast-notifications";
-import {RFPercentage} from "react-native-responsive-fontsize";
 
 const validationSchema = Yup.object().shape({
     email: Yup.string().required('این فیلد ضروری می باشد').email('ایمیل وارد شده معتبر نمی باشد'),
@@ -14,44 +12,29 @@ const validationSchema = Yup.object().shape({
 });
 
 const LoginScreen = ({ navigation, route }) => {
-    const toast = useToast();
 
     useEffect(() => {
         if (route.params.successRegister) {
-            customToast('success', 'ثبت نام با موفقیت انجام شد.');
+            // customToast('success', 'ثبت نام با موفقیت انجام شد.');
         }
     }, []);
 
-    const customToast = (type, message) => {
-        let id = toast.show(message, {
-            animationType: 'slide-in',
-            animationDuration: 500,
-            placement: "center",
-            type: type,
-            textStyle: {
-                fontFamily: 'byekan',
-                fontSize: RFPercentage(2),
-            },
-        });
-    };
-
     const handleLoginUser = async (user) => {
         try {
-            customToast('normal', 'در حال برقراری ارتباط ...');
+            // customToast('normal', 'در حال برقراری ارتباط ...');
             const status = await loginUser(user);
             if(status===200){
-                toast.hideAll();
-                // navigation.navigate('Home');
+                // toast.hideAll();
                 navigation.reset({
                     index: 0,
                     routes: [{name: 'Home'}]
                 });
             }else{
-                toast.hideAll();
-                customToast('warning', 'ایمیل کاربری یا کلمه عبور صحیح نمی باشد.');
+                // toast.hideAll();
+                // customToast('warning', 'ایمیل کاربری یا کلمه عبور صحیح نمی باشد.');
             }
         }catch (err) {
-            toast.hideAll();
+            // toast.hideAll();
             console.log(err);
         }
     };

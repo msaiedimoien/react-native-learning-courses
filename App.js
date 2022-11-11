@@ -2,7 +2,6 @@ import React, {useEffect, useState} from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { I18nManager } from "react-native";
 import StackNavigator from "./app/navigators/StackNavigator";
-import { ToastProvider } from 'react-native-toast-notifications'
 import {useFonts} from "expo-font";
 import * as SplashScreen from "expo-splash-screen";
 import {Provider} from "react-redux";
@@ -48,13 +47,11 @@ const App = () => {
             logoHeight={150}
             logoWidth={150}
         >
-            <ToastProvider>
                 <NavigationContainer>
                     <Provider store={store}>
                         <StackNavigator/>
                     </Provider>
                 </NavigationContainer>
-            </ToastProvider>
         </AnimatedSplash>
     )
 };

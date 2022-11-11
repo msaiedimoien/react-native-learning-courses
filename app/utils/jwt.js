@@ -1,5 +1,5 @@
-import jwtDecode from "jwt-decode";
+import jwt from "jwt-decode";
 
 export const decodeToken = (token) => {
-    return jwtDecode(token);
+    return jwt(token);
 };
