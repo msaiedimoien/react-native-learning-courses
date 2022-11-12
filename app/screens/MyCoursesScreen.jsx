@@ -5,7 +5,6 @@ import CustomText from "../components/shared/CustomText";
 import CustomSeparator from "../components/shared/CustomSeparator";
 import {Swipeable} from "react-native-gesture-handler";
 import CustomIcon from "../components/shared/CustomIcon";
-import CustomAlert from "../components/shared/CustomAlert";
 
 const confirmationAlert = (course, onPress) => {
     return Alert.alert(

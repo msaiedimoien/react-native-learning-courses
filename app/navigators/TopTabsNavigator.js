@@ -5,8 +5,8 @@ import {CoursesScreen, NewCoursesScreen, TopCoursesScreen} from "../screens";
 import {RFPercentage} from "react-native-responsive-fontsize";
 import {useDispatch} from "react-redux";
 import {getCourses} from "../redux/actions";
-import {loadingToast} from "../utils/toasts";
-import Toast from "react-native-tiny-toast";
+// import {loadingToast} from "../utils/toasts";
+// import Toast from "react-native-tiny-toast";
 
 const TopTabs = createMaterialTopTabNavigator();
 
@@ -18,12 +18,11 @@ const TopTabsNavigator = () => {
             const fetchData = async () => {
                 // loadingToast("در حال بارگذاری...");
                 dispatch(getCourses());
-                // Toast.hide();
             };
             fetchData();
+            // Toast.hide();
         } catch (err) {
             console.log(err);
-
         }
     }, []);
 
